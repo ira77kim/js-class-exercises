@@ -4,3 +4,7 @@ const array = ["red", "orange", "yellow"];
 let reversedArray = array.reverse();
 console.log(reversedArray);
 
+const sentence = "I want pizza";
+let sentenceEle = sentence.split(" ").reverse();
+console.log("original : " + sentence);
+

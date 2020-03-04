@@ -15,12 +15,16 @@ function loadImage(){
 }
 */
 
+//document.getElementById("Button").addEventListener("click",loadImage);
+let Button = document.getElementById("Button");
+Button.addEventListener("click",loadImage);
 function loadImage(){
   let source = "./js/img/yoda"+Math.floor(Math.random()*2)+".jpeg";
   let img=document.createElement('img');
 
   img.src = source;
   document.getElementById("image").appendChild(img)
+  
 }
 
 

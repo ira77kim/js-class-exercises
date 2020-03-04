@@ -3,7 +3,7 @@
 //4. Create a function that checks a string or sentence and returns true if
 //that parameter is a palindrome, (the string is the same forward as it is backward).
 
-let myWord = "madam"
+
 function words(string){
   let length = string.length;
   let characters=[];
@@ -13,19 +13,19 @@ function words(string){
   return characters;
 }
 
-function palindrome(characters){
-  if (characters === characters.reverse()){
-    return "The word is palindrome.";
-  }
-  else{
-    return "The word is not palindrome.";
-  }
-}
-console.log(palindrome(words(myWord)));
+// function palindrome(characters){
+//   if (characters === characters.reverse()){
+//     return "The word is palindrome.";
+//   }
+//   else{
+//     return "The word is not palindrome.";
+//   }
+// }
+//console.log(palindrome(words(myWord)));
 
 function wordcheck(string,asset){
   // asset(string);
-  console.log(asset(string)+asset(string).reverse());
+  console.log(asset(string)+ " changed into : " + asset(string).reverse());
   
   if (asset(string).join() == asset(string).reverse().join()){
     return "true";
