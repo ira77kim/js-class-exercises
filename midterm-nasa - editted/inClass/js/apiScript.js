@@ -17,10 +17,16 @@ lightOn(light);
 //spacebg();
 earth();
 scene.add(light,amblight);
+// import buildScene from "threeSceneInit.js";
+// buildScene();
 
 ///////////////////////////////////
 // main variables
+const ask = "https://api.nasa.gov/neo/rest/v1/feed?";
+let sampleDate = "1992-09-26";
 
+let apiKey = "p3KaIaY4YbAjnNz44dOvP4NEvurcRUvTJW9K9Ylz";
+let url;
 let array={};
 
 //parameters
@@ -34,10 +40,7 @@ button.addEventListener("click", getData);
 
 //get data is....
 function getData(e) {  
-  const ask = "https://api.nasa.gov/neo/rest/v1/feed?";
-  let sampleDate = "1992-09-26";
-  let apiKey = "p3KaIaY4YbAjnNz44dOvP4NEvurcRUvTJW9K9Ylz";
-  let url;
+
   let submission = document.getElementById("space").elements.item(0).value;
   console.log(submission);
 
@@ -96,27 +99,26 @@ function spacebg(){
 }
 
 //earth
+
+
 function earth() {
-  let earthgeometry   = new THREE.SphereGeometry(80, 32, 32);
+  let earthgeometry = new THREE.SphereGeometry(80, 32, 32);
   let earthtexture = new THREE.TextureLoader().load('images/earthmap1k.jpg');
   let earthmaterial  = new THREE.MeshPhongMaterial({map: earthtexture});
   earthmaterial.bumpScale = 20;
   let earthMesh = new THREE.Mesh(earthgeometry, earthmaterial);
   scene.add(earthMesh);
-  earthMesh.position.x=0;
-  earthMesh.position.y=-1;
-  earthMesh.position.z=-400;
-  earthMesh.rotation.x=0.5;
-  earthMesh.rotation.y=0.5;
+  earthMesh.position.set(0,-1,-400);
+  earthMesh.rotation.set(0.5,0.5,0);
   
   function animate(){
     requestAnimationFrame(animate);
     earthMesh.rotation.y+=0.01;
-    
     renderer.render(scene, camera);
   }
   animate();
 }
+
 
 //choose color, make asteroids,
 function fly(n){
@@ -164,32 +166,9 @@ function fly(n){
       }
     }
     //console.log("this"+ n+ " "+velocities[n]);
-    renderer.render(scene, camera);
-    renderer.shadowMap.enabled=true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    
   }
   animate();
-}
-
-function animate(asteroid,n){
-  requestAnimationFrame(animate);
-  asteroid.rotation.x +=0.01;
-  asteroid.rotation.y +=0.01;
-  asteroid.rotation.z +=0.01;
-  asteroid.position.z -=0.2*velocities[n];
-
-  if(asteroid.position.z<=-250){
-    asteroid.position.x +=1;
-    asteroid.position.z -=0.1*velocities[n];
-    if(asteroid.position.x>=100){
-      asteroid.position.x +=0.5
-      asteroid.position.z +=0.2*velocities[n];
-    }
-  }
-  //console.log("this"+ n+ " "+velocities[n]);
-  renderer.render(scene, camera);
-  renderer.shadowMap.enabled=true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 }
 
 function lightOn(light){
@@ -200,5 +179,9 @@ function lightOn(light){
   light.shadow.camera.near = 0.5;    // default
   light.shadow.camera.far = 500;     // default
 }
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.render(scene, camera);
+    
 
 
